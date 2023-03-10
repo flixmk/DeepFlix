@@ -5,11 +5,10 @@ import timm
 import torch
 import numpy as np
 from prdc import compute_prdc
-from torch.utils.data import Dataset
-from torch.utils.data import DataLoader
 from tqdm import tqdm
-from dataset import get_dataloader
-from feature_extractor import calculate_features
+# from dataset import get_dataloader
+# from feature_extractor import calculate_features
+# from subprocess import call
 
 
 def pr_values(real_dataloader, fake_dataloader):
@@ -40,7 +39,7 @@ def evaluate_datasets(datasets:dict, model, real_data, inception_pretrained=Fals
 
             report[f"{key}-{cl}"] = values
             
-            !python -m pytorch_fid {value}/{cl} {real_data}/{cl} --device cuda:0
+            call("python -m pytorch_fid {value}/{cl} {real_data}/{cl} --device cuda:0")
                 
             print("-----------------------------------------------------")
     
