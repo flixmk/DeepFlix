@@ -24,4 +24,6 @@ def calculate_features(dataloader, model=None, pretrained=None):
     for count, image in enumerate(dataloader):
         output = model(image.float().to(device))
         features = np.concatenate((features, output.cpu().detach().numpy()), axis=0)
+
+    del model
     return features

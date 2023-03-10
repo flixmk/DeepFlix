@@ -304,6 +304,8 @@ def main(path1, path2, batch_size, dims=2048, num_workers=None, pretrained=False
                                           num_workers,
                                           pretrained=False)
     # print('FID: ', fid_value)
+
+    del model
     return fid_value
 
 
