@@ -20,7 +20,7 @@ def calculate_features(dataloader, model=None, pretrained=None):
             print("No model configured")
 
     dummy_output = model(torch.randn(1, 3, 512, 512).to(device))
-    features = np.empty((0,int(dummy_output.shape[1]))), np.empty((0,int(dummy_output.shape[1])))
+    features = np.empty((0,int(dummy_output.shape[1])))
     for count, image in tqdm(enumerate(dataloader)):
         output = model(image.float().to(device))
         features = np.concatenate((features, output.cpu().detach().numpy()), axis=0)

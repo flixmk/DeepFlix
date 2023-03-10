@@ -3,6 +3,7 @@ import torch
 from PIL import Image
 from torch.utils.data import Dataset
 from torch.utils.data import DataLoader
+import glob
 
 
 class ImageDataset(Dataset):
@@ -30,6 +31,5 @@ class ImageDataset(Dataset):
         return self.images[idx]
     
 def get_dataloader(img_dir):
-    
     dataset = ImageDataset(img_dir)
     return DataLoader(dataset, batch_size=8)
