@@ -251,7 +251,7 @@ def calculate_fid_given_paths(path1, path2, batch_size, device, dims, num_worker
     m2, s2 = compute_statistics_of_path(path2, model, batch_size,
                                         dims, device, num_workers)
     fid_value = calculate_frechet_distance(m1, s1, m2, s2)
-
+    del model
     return fid_value
 
 
@@ -278,6 +278,7 @@ def save_fid_stats(path1, path2, batch_size, device, dims, num_workers=1):
                                         dims, device, num_workers)
 
     np.savez_compressed(path2, mu=m1, sigma=s1)
+    del model
 
 
 def main(path1, path2, batch_size, dims=2048, num_workers=None, pretrained=False):
@@ -304,8 +305,6 @@ def main(path1, path2, batch_size, dims=2048, num_workers=None, pretrained=False
                                           num_workers,
                                           pretrained=False)
     # print('FID: ', fid_value)
-
-    del model
     return fid_value
 
 
