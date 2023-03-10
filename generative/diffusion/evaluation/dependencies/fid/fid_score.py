@@ -111,7 +111,7 @@ def get_activations(files, model, batch_size=50, dims=2048, device='cpu',
 
     start_idx = 0
 
-    for batch in tqdm(dataloader):
+    for batch in dataloader:
         batch = batch.to(device)
 
         with torch.no_grad():
@@ -303,7 +303,8 @@ def main(path1, path2, batch_size, dims=2048, num_workers=None, pretrained=False
                                           dims,
                                           num_workers,
                                           pretrained=False)
-    print('FID: ', fid_value)
+    # print('FID: ', fid_value)
+    return fid_value
 
 
 if __name__ == '__main__':
