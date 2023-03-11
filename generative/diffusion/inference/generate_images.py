@@ -9,6 +9,7 @@ from diffusers.utils import logging
 
 CLASSES = ['NORMAL', 'CNV', 'DRUSEN', 'DME']
 
+
 def generate(pipeline, 
                     num_samples,
                     height: int = 512, 
@@ -30,7 +31,7 @@ def generate(pipeline,
         if not isExist:
           os.makedirs(save_path_class)
 
-      for it in tqdm(range(iterations)):
+      for it in range(iterations):
         with autocast("cuda"):
           images = pipeline(
               prompt = class_prompt,
