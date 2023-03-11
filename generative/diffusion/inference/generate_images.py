@@ -21,16 +21,18 @@ def generate(pipeline,
                     save_path: str = None,):
 
     iterations = num_samples // num_images_per_prompt
-    print(iterations)
+    print(f"Iterations per class: {iterations}")
 
     for class_prompt in CLASSES:
+      print(f"Current class(prompt): {class_prompt}")
       # create fodler structure
       if save_path is not None:
         save_path_class = save_path + f"/{class_prompt}"
         isExist = os.path.exists(save_path_class)
         if not isExist:
           os.makedirs(save_path_class)
-
+      if negative_prompt == "reverse":
+        negative_prompt = [x for x in CLASSES if x!=class_prompt]
       for it in range(iterations):
         with autocast("cuda"):
           images = pipeline(
@@ -46,3 +48,5 @@ def generate(pipeline,
           id_num = idx + (it * num_images_per_prompt)
           id = str(id_num).zfill(len(str(num_samples)))
           image.save(f"{save_path_class}/{class_prompt}-({id}).png")
+
+      negative_prompt = "reverse"
