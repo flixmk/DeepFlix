@@ -13,7 +13,7 @@ def split_data(num_files_per_class,
     DEST_PATH = dest_path
 
     # ORIGIN_PATH = f"/home/flix/Documents/oct-data/CellData/OCT/train"
-    # DEST_PATH = f"/home/flix/Documents/oct-data/splits/data_{NUM_FILES_PER_CLASS}"
+    DEST_PATH = f"/{dest_path}/data_{NUM_FILES_PER_CLASS}_{resolution}"
 
 
     class_directories = glob.glob(f"{ORIGIN_PATH}/*")
