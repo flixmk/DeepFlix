@@ -31,9 +31,7 @@ def generate(pipeline,
         isExist = os.path.exists(save_path_class)
         if not isExist:
           os.makedirs(save_path_class)
-      if negative_prompt == "reverse":
-        negative_prompt = [x for x in CLASSES if x!=class_prompt]
-      for it in range(iterations):
+      for it in tqdm(range(iterations)):
         with autocast("cuda"):
           images = pipeline(
               prompt = class_prompt,
@@ -48,5 +46,3 @@ def generate(pipeline,
           id_num = idx + (it * num_images_per_prompt)
           id = str(id_num).zfill(len(str(num_samples)))
           image.save(f"{save_path_class}/{class_prompt}-({id}).png")
-
-      negative_prompt = "reverse"
